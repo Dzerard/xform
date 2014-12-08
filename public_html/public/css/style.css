@@ -1,0 +1,224 @@
+/* 
+    Document   : style
+    Author     : Luke
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    font-family: 'Lato', sans-serif;
+    padding-top: 50px;
+}
+.settings-button:hover:before {
+    transform: scale(1.5);
+}
+.settings-button:before {
+    display:inline-block;
+    content: "\f085";
+    font-family: FontAwesome;
+    line-height: 14px;
+    padding-right: 10px;
+     transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+    -moz-transition:all 0.3s ease-in-out;
+    -o-transition:all 0.3s ease-in-out; 
+}
+.print-button:hover:before {
+    transform: scale(1.5);
+}
+.print-button:before {
+    display:inline-block;
+    content: "\f02f";
+    font-family: FontAwesome;
+    line-height: 14px;
+    padding-right: 10px;
+     transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+    -moz-transition:all 0.3s ease-in-out;
+    -o-transition:all 0.3s ease-in-out; 
+}
+.navbar-default {
+    box-shadow: 0px 0px 5px #000;
+    background-color: #fff;
+}
+.navbar-fixed-top {
+    border-width: 0px;
+}
+.navbar-default .navbar-nav > li > a {
+    transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+    -moz-transition:all 0.3s ease-in-out;
+    -o-transition:all 0.3s ease-in-out;    
+    font-size: 12px;
+    font-weight: 300;
+}
+.navbar-default .navbar-nav > li > a:hover {
+    background-color: #fcfcfc;
+    color: #000;        
+}
+
+a {
+    color: #337ab7;
+}
+a:hover,a:visited {
+    color: #337ab7;
+} 
+
+footer a,footer a:visited {
+    text-decoration: none;
+    color: #9d9d9d;
+    font-weight: 400;
+}
+footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    color: #9d9d9d;
+    font-size: 10px;
+    padding: 2px;
+    text-align: center;
+    line-height: 14px;
+    background: rgba(255, 255, 255, 0.1);
+}
+footer p{
+    margin:0;
+}
+.sidebar {
+    display: none;
+}
+.main {
+   position: relative; 
+}
+header {
+    position: relative;
+}
+.contributors_refresh {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.container-content {
+    
+}
+.btn.btn-default {
+    border-radius: 0px;
+    outline: none;
+}
+.btn.btn-default:hover {    
+    box-shadow: 0px 0px 3px #000;
+    background-color: #fbfbfb;
+}
+.navbar-toggle .icon-bar + .icon-bar {
+    margin-top: 4px;
+    
+}
+.nav-sidebar {
+    margin-right: -21px;
+    margin-bottom: 20px;
+    margin-left: -20px;
+    font-size: 12px; 
+    font-weight: 400;
+}
+
+.nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus {
+    color: #fff;
+    background-color: #428bca;
+}
+.nav-sidebar > li > a {
+    padding: 7px 15px;    
+}
+.toogle-sidebar {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    line-height: 32px;
+    background: rgba(0,0,0,0.6);
+    box-shadow: 0px 0px 3px #000;
+    color: #fff;
+    font-weight: 300;
+    font-size: 32px;
+    border:0px;
+    outline: none;
+}
+.toogle-sidebar,.btn.btn-default {
+    transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+    -moz-transition:all 0.3s ease-in-out;
+    -o-transition:all 0.3s ease-in-out; 
+}
+.toogle-sidebar:hover { 
+    text-decoration: none;
+    color:#000;
+    background: #fff;    
+    box-shadow: 0px 0px 3px #ccc;
+}
+.tooltip .tooltip-inner{
+    
+    font-family: 'Lato', sans-serif;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 12px;
+    max-width: 200px;
+    white-space: nowrap;
+}
+.navbar-toggle {
+    border:0px;
+}
+.navbar-toggle span{
+    transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+    -moz-transition:all 0.3s ease-in-out;
+    -o-transition:all 0.3s ease-in-out; 
+}
+.navbar-default .navbar-toggle:hover,.navbar-default .navbar-toggle:focus {
+    background-color: #fff;
+}
+.navbar-toggle:hover .icon-bar {
+    /*width: 30px;*/
+    /*margin-right: -5px;*/
+    /*box-shadow: 0 0 1px #ebebeb;*/
+    transform: scale(1.5);
+    /*height: 3px;*/
+}
+/* google */
+.google-visualization-table-table {    
+   font-family: 'Lato', sans-serif !important;     
+}
+.google-visualization-table-tr-head .gradient, 
+.google-visualization-table-tr-head-nonstrict .gradient, 
+.google-visualization-table-div-page .gradient {
+    color: #fff;
+    background-color: #337ab7 !important;
+    background-image: none !important;
+}
+.google-visualization-table-sortind {
+    color: #fff !important;
+    font-size: 12px !important;
+    padding-left: 10px !important;
+    line-height: 18px !important;
+    vertical-align: top !important;
+}
+#contributors_chart svg text{
+   font-family: 'Lato', sans-serif !important;      
+}
+
+
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 51px;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        padding: 35px 20px;
+        /*overflow-x: hidden;*/
+        /*overflow-y: auto;*/
+        background-color: #f5f5f5;
+        border-right: 1px solid #eee;
+    }
+}
+
