@@ -12,15 +12,16 @@
         <link media="all" rel="stylesheet" type="text/css" href="libs/bootstrap/dist/css/bootstrap.css" />
         <link media="screen" rel="stylesheet" type="text/css" href="libs/fontawesome/css/font-awesome.min.css" >   
         <link media="all" rel="stylesheet" type="text/css" href="public/css/style.css" />            
-           <!--<script src="libs/angular/angular.js"></script>-->    
-           <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-           
-           
-        <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-        <script src="libs/angular-ext.js"></script>    
+
+        <!--<script src="libs/angular/angular.js"></script>-->    
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>        
+        <script src="libs/angular.min.js"></script>
         <script src="libs/jquery/dist/jquery.js"></script>
         <script src="libs/modernizr/modernizr.js"></script>    
         <script src="libs/bootstrap/dist/js/bootstrap.js"></script>      
+        
+        <script src="libs/angular-ext.js"></script>            
+        <script src="libs/ready.js"></script>           
         <script src="libs/xformation.js"></script>  
         
     </head>
@@ -35,7 +36,7 @@
                       <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand  hidden settings-top-menu" data-toggle="tooltip" data-placement="right" title="{{  'APP_SETTINGS' | translate }}" href="javascript:;">
-                        <i class="fa fa-cog"></i>
+                        <i class="fa fa-bars"></i>
                     </a>
                     <a class="navbar-brand" href="javascript:;"><i class="fa fa-github"></i>&ensp;{{ 'APP_NAME' | translate }}</a>
                 </div>
@@ -75,30 +76,30 @@
                         </ul>
                     </form>                  
                 </div>
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div id="mainContainer" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <header>
                         <h1 class="page-header">{{ 'APP_NAME' | translate }} - contributors.json</h1>
-                        <button class="btn btn-default contributors_refresh" data-toggle="tooltip" data-placement="left" title="{{  'APP_SETTINGS_REFRESH' | translate }}"><i class="fa fa-refresh"></i></button>
+                        <button id="contributors_refresh" class="btn btn-default btn-refresh" data-toggle="tooltip" data-placement="left" title="{{  'APP_SETTINGS_REFRESH' | translate }}"><i class="fa fa-refresh"></i></button>
+                    </header>                 
+                    <div class="container-content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">                          
+                                    <div id='contributors_table'></div>
+                                </div>
+                                <div class="col-md-6">                          
+                                      <div id='contributors_chart'></div>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>        
+                    <header>
+                        <h1 class="page-header">{{ 'APP_NAME' | translate }} - X-Formation</h1>                    
+                        <button id="github_refresh" class="btn btn-default btn-refresh" data-toggle="tooltip" data-placement="left" title="{{  'APP_SETTINGS_REFRESH' | translate }}"><i class="fa fa-refresh"></i></button>
                     </header>
-                    
-                  
-                  <div class="container-content">
-                      <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-md-6">                          
-                          <div id='contributors_table'></div>
-                      </div>
-                      <div class="col-md-6">                          
-                            <div id='contributors_chart'></div>    
-                      </div>
-                    </div>
-                      </div>
-                      
-                  </div>  
-                  <h1 class="page-header">{{ 'APP_NAME' | translate }} - X-Formation</h1>
-                  <div class="container-content-gihub">
-                      
-                  </div>
+                    <div class="container-content-gihub">
+                        <div class="loader"></div>
+                    </div>                  
                 </div>            
             </div>
         </div>        
@@ -108,8 +109,24 @@
           </div>
         </footer>
 
-                         
-        
+           
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title" id="myModalLabel">{{ 'MODAL_INFO_TITLE' | translate }}</h4>
+                </div>
+                <div class="modal-body">
+                  Ustawienia są w trakcie budowy :)
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'TEXT_CLOSE' | translate }}</button>
+                  <button type="button" class="btn btn-primary">{{ 'TEXT_SAVE' | translate }}</button>
+                </div>
+              </div>
+            </div>
+        </div>
         
     </body>
 </html>

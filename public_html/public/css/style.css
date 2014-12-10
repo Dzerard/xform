@@ -50,13 +50,12 @@ body {
     -moz-transition:all 0.3s ease-in-out;
     -o-transition:all 0.3s ease-in-out;    
     font-size: 12px;
-    font-weight: 300;
+    color: #888;
+    font-weight: 400;
 }
 .navbar-default .navbar-nav > li > a:hover {
-    background-color: #fcfcfc;
-    color: #000;        
+    color: #333;        
 }
-
 a {
     color: #337ab7;
 }
@@ -86,29 +85,32 @@ footer p{
 .sidebar {
     display: none;
 }
+.sidebar .nav-sidebar {
+    overflow: hidden;
+}
 .main {
-   position: relative; 
+    position: relative;
+    transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+    -moz-transition:all 0.3s ease-in-out;
+    -o-transition:all 0.3s ease-in-out; 
 }
 header {
     position: relative;
 }
-.contributors_refresh {
+.btn.btn-default.btn-refresh {
     position: absolute;
     right: 0px;
     top: 0px;
-}
-.container-content {
-    
-}
-.btn.btn-default {
-    border-radius: 0px;
-    outline: none;
     border-radius: 50%;
+}
+.btn.btn-default, .btn.btn-primary {
+    border-radius: 0px;
+    outline: none;  
 }
 .btn.btn-default:hover {    
     box-shadow: 0px 0px 3px #ddd;
     background-color: #fff;
-    border-radius: 50%;
 }
 .btn.btn-default:focus {
     outline: none;
@@ -118,7 +120,7 @@ header {
 .navbar-toggle .icon-bar + .icon-bar {
     margin-top: 4px;    
 }
-.settings-top-menu {
+.navbar > .container-fluid .navbar-brand.settings-top-menu {
     margin-right: 15px;
     font-size: 24px;
     background: #000 !important;
@@ -126,7 +128,6 @@ header {
     text-shadow: 0px 0px 2px #fff;
     margin-left: -65px;
 }
-
 /* Buzz */
 @-webkit-keyframes buzz {
   50% {
@@ -151,7 +152,22 @@ header {
     transform: translateX(-3px) rotate(-2deg);
   }
 }
-
+.loader {
+    text-align: center;
+}
+.loader:before {
+    font-family: FontAwesome;
+    font-size: 64px;
+    content: "\f013";
+    display: inline;
+    -webkit-animation: fa-spin 1.5s infinite linear;
+    animation: fa-spin 1.5s infinite linear;    
+}
+.loader:after {
+    clear:both;
+    content: '';
+    display: block;
+}
 .settings-top-menu:hover .fa{
     -webkit-animation-name: buzz;
     animation-name: buzz;
@@ -192,7 +208,8 @@ header {
     outline: none;
     background: transparent;
 }
-.toogle-sidebar,.btn.btn-default {
+.toogle-sidebar,
+.btn {
     transition:all 0.3s ease-in-out;
     -webkit-transition:all 0.3s ease-in-out;
     -moz-transition:all 0.3s ease-in-out;

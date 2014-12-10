@@ -1,0 +1,8 @@
+RewriteEngine on
+
+#Options -Indexes
+
+#AuthType Basic
+#AuthName "restricted area"
+#AuthUserFile /home/lukaszg1/public_html/xf/.htpasswd
+#require valid-user

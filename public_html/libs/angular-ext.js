@@ -5,9 +5,7 @@ angular.module("ngTranslate",["ng"]).config(["$provide",function(t){$TranslatePr
 var app = angular.module('xFormation', ['ngTranslate']);
 
 var globalTranslations = {    
-    'year' : function() {var d=new Date(); return d.getFullYear().toString();},
-  
-      
+    'year' : function() {var d=new Date(); return d.getFullYear().toString();},      
 };
 
 // Configuring $translateProvider
@@ -28,6 +26,10 @@ app.config(['$translateProvider', function ($translateProvider) {
         'CONTRIBUTORS_TEAM' : 'Team',
         'CONTRIBUTORS_CONTRIB' : 'Contributors',
         'APP_SETTINGS_REFRESH': 'Refresh',
+        'MODAL_INFO_TITLE': 'Settings Modal Info',
+        'TEXT_CLOSE': 'Close',
+        'TEXT_SAVE': 'Save',
+        'TEXT_CANCEL': 'Cancel',
         
         'GETTING_STARTED_HEADLINE': 'Getting Started',
         'HEADLINE_FILTER': 'ngTranslate::translateFilter',
@@ -60,6 +62,10 @@ app.config(['$translateProvider', function ($translateProvider) {
         'CONTRIBUTORS_NICK' : 'Nick',
         'CONTRIBUTORS_TEAM' : 'Zespół',
         'APP_SETTINGS_REFRESH': 'Odśwież',
+        'MODAL_INFO_TITLE': 'Ustawienia informacje',
+        'TEXT_CLOSE': 'Zamknij',
+        'TEXT_SAVE': 'Zapisz',
+        'TEXT_CANCEL': 'Anuluj',
             
         'GETTING_STARTED_HEADLINE': 'Start',
         'HEADLINE_FILTER': 'ngTranslate::translateFilter',
@@ -76,13 +82,9 @@ app.config(['$translateProvider', function ($translateProvider) {
         'INFO_TEXT_TRANSLATE_DIRECTIVE_3': 'Das funktioniert in allen Kombinationen.'
     });   
     
-    //localStorage vs cookie for load language
-    
-    
+    //localStorage vs cookie for load language   
     $translateProvider.uses('pl');
 }]);
-
-
 
 app.controller('ctrl', ['$translate', '$scope', function ($translate, $scope) {
     $scope.toggleLang = function () {
@@ -91,17 +93,15 @@ app.controller('ctrl', ['$translate', '$scope', function ($translate, $scope) {
     
     $scope.windowPrint = function() {
         window.print();
-    };
-    
+    };    
     
     globalTranslations = {
         'contributors_chart'    : $translate('CONTRIBUTORS_CHART'),
         'contributors_nick'     : $translate('CONTRIBUTORS_NICK'),
         'contributors_team'     : $translate('CONTRIBUTORS_TEAM'),       
-        'contributors_contrib'  : $translate('CONTRIBUTORS_CONTRIB')       
-        
-    };
+        'contributors_contrib'  : $translate('CONTRIBUTORS_CONTRIB')               
+    };    
+    
+    
     
 }]);
-
-console.log(globalTranslations);
