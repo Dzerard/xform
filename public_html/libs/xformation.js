@@ -13,8 +13,9 @@ var XFormation = {
     },
     tooltip: function() {
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-toggle="tooltip"]').tooltip();
         });
+       
     },
     init: function() { 
         this.getData();
@@ -34,8 +35,8 @@ var XFormation = {
         $.ajax({    
             type: "POST",
             dataType: "json",
-            data: {url: 'http://www.lukaszgielar.com/contributors.json'},
-            url: 'ext/get_file.php',            
+            data: {url: 'http://lukaszgielar.com/contributors.json'},
+            url: 'ext/get_contributors.php',            
             success: function(data) {
                 
                 that.setData(data);
@@ -98,6 +99,7 @@ function fireChart(response) {
         var options = {
           title: globalTranslations.contributors_chart
         //  vAxis: {title: 'Year',  titleTextStyle: {color: 'red'}}
+//        'width':500,'height':400
         };
         
         var chart = new google.visualization.BarChart(document.getElementById('contributors_chart'));        
@@ -115,7 +117,7 @@ function fireChart(response) {
         
         google.visualization.events.addListener(table, 'select',
             function(event) {
-            console.log(event);
+           // console.log(event);
 //            data.sort([{column: event.column, desc: !event.ascending}]);
 //            chart.draw(view, options);
         });
@@ -128,13 +130,75 @@ function fireChart(response) {
 
     window.onload = resize();
     window.onresize = resize;
-        
-        
-//        var options = {'width':500,'height':400};
-//
-//        // Instantiate and draw our chart, passing in some options.
-//        var chart = new google.visualization.BarChart(document.getElementById('contributors_chart'));
-//        chart.draw(data, options);
+       
     }
 }
 
+$.ajax({    
+    type: "POST",
+    dataType: "json",
+    data: {url: 'http://www.lukaszgielar.com/contributors.json'},
+    url: 'ext/get_github.php',            
+    success: function(data) {
+
+              console.log(data);
+//                return that.data;                         
+            }         
+        });
+        
+$(document).ready(function() {
+    
+    $('.toogle-sidebar').on('click', function() {
+        
+        var b     = $(this),
+            width = b.parent().width()+100;
+        b.tooltip('hide');
+        b.parent().animate({left: -width},'medium', function(){
+            
+            $('.settings-top-menu').removeClass('hidden').animate({marginLeft: -15},500);
+
+        });   
+    });
+        
+    
+    
+    $('.activate-settings-button').on('click', function() {
+        
+        var b = $(this),
+            c = $(this).parent().find('.'+b.data('rel'));
+                if(b.hasClass('active')) {
+                    c.slideUp('fast',function(){
+                        b.removeClass('active');
+                    });
+                    return;
+                } 
+                c.slideDown('fast',function(){
+                    b.addClass('active');
+                });
+            return false;
+    });
+        
+    $('.show-settings > li > a').on('click', function() {
+        
+        var b = $(this);
+        
+        
+        if(b.data('rel') !== 'undefined') {
+                var c = $(this).parent().find('.'+b.data('rel'));
+                if(b.hasClass('active')) {
+                    c.slideUp('fast',function(){
+                        b.removeClass('active');
+                    });
+                    return;
+                } 
+                c.slideDown('fast',function(){
+                    b.addClass('active');
+                });
+            }
+        
+        
+    }); 
+    
+    
+    
+});

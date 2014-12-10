@@ -103,15 +103,66 @@ header {
 .btn.btn-default {
     border-radius: 0px;
     outline: none;
+    border-radius: 50%;
 }
 .btn.btn-default:hover {    
-    box-shadow: 0px 0px 3px #000;
-    background-color: #fbfbfb;
+    box-shadow: 0px 0px 3px #ddd;
+    background-color: #fff;
+    border-radius: 50%;
+}
+.btn.btn-default:focus {
+    outline: none;
+    background: #fff;
+/*    box-shadow: 0px 0px 3px #337ab7;*/    
 }
 .navbar-toggle .icon-bar + .icon-bar {
-    margin-top: 4px;
-    
+    margin-top: 4px;    
 }
+.settings-top-menu {
+    margin-right: 15px;
+    font-size: 24px;
+    background: #000 !important;
+    color: #fff !important;
+    text-shadow: 0px 0px 2px #fff;
+    margin-left: -65px;
+}
+
+/* Buzz */
+@-webkit-keyframes buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+
+@keyframes buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+
+.settings-top-menu:hover .fa{
+    -webkit-animation-name: buzz;
+    animation-name: buzz;
+    -webkit-animation-duration: 0.15s;
+    animation-duration: 0.15s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;    
+}
+
 .nav-sidebar {
     margin-right: -21px;
     margin-bottom: 20px;
@@ -129,19 +180,17 @@ header {
 }
 .toogle-sidebar {
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: -32px;
+    top: -2px;
     width: 32px;
     height: 32px;
     text-align: center;
-    line-height: 32px;
-    background: rgba(0,0,0,0.6);
-    box-shadow: 0px 0px 3px #000;
-    color: #fff;
+    line-height: 30px;   
     font-weight: 300;
     font-size: 32px;
     border:0px;
     outline: none;
+    background: transparent;
 }
 .toogle-sidebar,.btn.btn-default {
     transition:all 0.3s ease-in-out;
@@ -151,9 +200,11 @@ header {
 }
 .toogle-sidebar:hover { 
     text-decoration: none;
-    color:#000;
-    background: #fff;    
-    box-shadow: 0px 0px 3px #ccc;
+     transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    top:0px;
 }
 .tooltip .tooltip-inner{
     
@@ -166,6 +217,69 @@ header {
 }
 .navbar-toggle {
     border:0px;
+}
+.nav.show-settings {
+    background: #337ab7 !important;
+    color: #fff;
+    border-top: 1px solid #ddd; 
+    border-bottom: 1px solid #ddd;
+}
+.nav.show-settings .file-upload {
+    padding: 10px 15px;
+    background: #fff;
+    color: #000;
+    border-right: 1px solid #eee;
+}
+.activate-settings ul > li {
+    border-bottom: 1px solid #ddd;
+}
+.activate-settings ul > li:last-child {
+    border-bottom: 0px;
+}
+.activate-settings ul > li div {
+    display: none;
+}
+.nav.show-settings {
+    display: none;
+}
+.nav.show-settings > li > a {
+    color: #fff;
+}
+.nav.show-settings > li > a:after {
+    display: inline-block;
+    position: absolute;
+    right: 15px;
+    content: "\f107";
+    font-family: FontAwesome;
+    font-size: 13px;
+    transition:all 0.3s ease-in-out;
+    
+}
+.nav.show-settings > li > a.active:after {
+    content: "\f106";    
+}
+.nav-sidebar > li > a:after {   
+    display: inline-block;
+    position: absolute;
+    right: 15px;
+    content: "\f103";
+    font-family: FontAwesome;
+    font-size: 13px;
+    -webkit-transition:all 0.3s ease-in-out;
+    -moz-transition:all 0.3s ease-in-out;
+    -o-transition:all 0.3s ease-in-out;
+}
+.nav-sidebar > li > a.active:after {   
+    content: "\f102";    
+}
+.nav > li > a:hover {
+    transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+    -moz-transition:all 0.3s ease-in-out;
+    -o-transition:all 0.3s ease-in-out; 
+}
+.nav.show-settings > li > a:hover, .nav.show-settings > li > a:focus {
+    background: #23527c;
 }
 .navbar-toggle span{
     transition:all 0.3s ease-in-out;
@@ -205,6 +319,30 @@ header {
    font-family: 'Lato', sans-serif !important;      
 }
 
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+@-webkit-keyframes fa-buzz {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
 
 @media (min-width: 768px) {
     .sidebar {
