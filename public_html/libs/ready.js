@@ -322,11 +322,10 @@ $(document).ready(function() {
     //bootstrap
     $(function () { $('[data-toggle="tooltip"]').tooltip(); });                    
     
-    function log( message ) {
-      $( "<div>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
- 
+    
+    var mod = $('#myModal');
+    mod.find('.btn-primary').on('click', addNewUserToList);         
+    
     $( "#searchGitUser" ).autocomplete({
       source: function( request, response ) {
         $.ajax({
@@ -336,19 +335,26 @@ $(document).ready(function() {
           data: {
             q: request.term
           },
-          success: function( data ) {
-              //console.log(data);
-              response( data.users );
-            
+          success: function( data ) {              
+              response( data.users );            
           }
         });
       },
       minLength: 3,
       select: function( event, ui ) {
-          //open dialog bedzie :P 
-        log( ui.item ?
-          "Selected: " + ui.item.label :
-          "Nothing selected, input was " + this.value);
+   
+        XFormation.userSearch = ui;
+        
+       console.log(ui);
+        
+        mod.modal('show');
+        mod.on('shown.bs.modal', function (e) {
+            
+            var body = mod.find('.modal-body');
+            
+            body.html($translate('TEXT_ADD_NEW_USER')+' <b>'+ui.item.username + '</b> ?' ).fadeIn('fast');            
+                                                                                 
+        });
       },
       open: function() {
         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
@@ -361,4 +367,43 @@ $(document).ready(function() {
         .append( "<a>"+ item.username +"</a>" )
         .appendTo( ul );
     };
+    
+    function addNewUserToList() {
+        
+        mod.modal('hide');
+        
+        var usersForm = $('.github-user-choose');        
+                        
+        usersForm.parent().find('.alert').remove(); 
+        usersForm.parent().find('.loader').remove(); 
+        
+        $.ajax({
+                type: "POST",
+                dataType: "json",
+                data: {newUser: XFormation.userSearch.item.username},
+                url: usersForm.attr('action'),                          
+                beforeSend: function() {
+                    usersForm.hide().before('<div class="loader"></div>');                                
+                },
+                success : function(result) {
+            
+                    usersForm.parent().find('.loader').fadeOut('medium', function() {
+                        usersForm.before('<div class="alert alert-success">'+$translate('TEXT_OK_NEW_USER_SAVED')+'</div>');
+                    });                      
+                    
+                    refreshGitHubUser(XFormation.userSearch.item.username);                                        
+                    
+                    setTimeout(function() {
+                        usersForm.parent().find('.alert').fadeOut(function() {
+                            usersForm[0].reset();
+                            usersForm.slideDown('fast');                            
+                        });
+                    }, 2000);
+                },
+                error : function(xmlHttpRequest, textStatus, errorThrown) {
+    //                    console.log(errorThrown);
+                }
+            });                                                           
+            return false;                   
+    }
 });

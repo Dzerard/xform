@@ -874,7 +874,12 @@ header {
     background: transparent;
     font-size: 30px;
     font-weight: 100;
-    
+}
+.modal-content {
+    border-radius: 0px;
+}
+.modal-header {
+    text-transform: uppercase;
 }
 .panel-default > .panel-heading .btn:hover {
     box-shadow: none;

@@ -15,6 +15,7 @@ var XFormation = {
 
     data     : null,
     dataSort : null,
+    userSearch : null,
     setData: function(data) {
         this.data = data;                                       
     },
@@ -50,8 +51,12 @@ var XFormation = {
     },
     setForms: function(data) {
        
-        var radios = $('.contributors-settings-form input[name=connectRadio]');
-        radios.filter('[value='+data.defaultConnection+']').prop('checked', true);
+        var connectRadios = $('.contributors-settings-form input[name=connectRadio]');
+        connectRadios.filter('[value='+data.defaultConnection+']').prop('checked', true);
+        
+        //load first all users stored in file then check
+        var userRadios = $('.github-user-choose input[name=userRadio]');
+        userRadios.filter('[value='+data.defaultUser+']').prop('checked', true);
        
     },   
     loadConfiguration: function() {

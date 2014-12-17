@@ -13,7 +13,7 @@ This project combine PHP (PHP GitHub API), and JavaScript(jQuery and Angular)
 
 ##Demo
 
-[My webpage](http://lukaszgielar.com/xf/).
+[My webpage](http://lukaszgielar.com/xf/)
 
 Login: `xform`
 Pass: `xform`

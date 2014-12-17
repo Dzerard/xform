@@ -40,7 +40,7 @@ app.config(['$translateProvider', function ($translateProvider) {
         'APP_GIT_STARGAZERS' : 'Stargazers',
         'APP_GIT_WATCHERS' : 'Watchers', 
         'APP_GIT_OPEN_ISSUES' : 'Open issues',
-        'APP_USER_TYPE_ORG' : 'Organization',
+        'APP_USER_TYPE_ORG' : 'Profile on GitHub',
         'APP_USER_TYPE_U' : 'Private person',
         'APP_PROFILE_INFO' : 'Profile info',
         'APP_PROJECT_LIST' : 'Project list',
@@ -65,7 +65,7 @@ app.config(['$translateProvider', function ($translateProvider) {
         'CONTRIBUTORS_CONTRIB' : 'Contributors',         
         'GITHUB_LINK_TEXT': 'View source on GitHub',                         
         'HEADLINE': 'Introducing GitHub Stats',
-        'MODAL_INFO_TITLE': 'Settings Modal Info',
+        'MODAL_INFO_TITLE': 'Add user',
         'TEXT_OK_FILE' : 'File saved !',
         'TEXT_FILE_IS_DAMAGED' : 'File is damaged !',
         'TEXT_WRONG_FILE' : 'Inccorect File',
@@ -79,7 +79,9 @@ app.config(['$translateProvider', function ($translateProvider) {
         'TEXT_HIDE': 'Hide',
         'TEXT_SHOW': 'Show',
         'TEXT_LIST_EMPTY': 'Empty',       
+        'TEXT_ADD_NEW_USER' : 'Do you wanna add new user',
         'TEXT_OK_GITHUB_USER_SETTINGS_SAVED' : 'Default user saved',
+        'TEXT_OK_NEW_USER_SAVED' : 'New user has been added',
         'SUB_HEADLINE': 'Translations for Angular'
     });   
     
@@ -106,6 +108,8 @@ app.config(['$translateProvider', function ($translateProvider) {
         'TEXT_OK_C_SETTINGS_SAVED': 'Ustawienia zostały zapisane',
         'TEXT_URL_IS_BROKEN' : 'URL do pliku jest błędny',
         'APP_GIT_VISIT_GITHUB': 'Pokaż w GitHub',
+        'TEXT_ADD_NEW_USER' : 'Czy chcesz dodać nowego użytkownika',
+        
         
         'CURRENT_YEAR': globalTranslations.year(),     
         'SUB_HEADLINE': 'Translacje dla aplikacji',
@@ -116,7 +120,7 @@ app.config(['$translateProvider', function ($translateProvider) {
         'CONTRIBUTORS_NICK' : 'Nick',
         'CONTRIBUTORS_TEAM' : 'Zespół',
         'APP_SETTINGS_REFRESH': 'Odśwież',
-        'MODAL_INFO_TITLE': 'Ustawienia informacje',
+        'MODAL_INFO_TITLE': 'Dodaj użytkownika',
         'HEADLINE': 'Statystyki',
         'TEXT_CLOSE': 'Zamknij',
         'TEXT_CLEAR': 'Wyczyść',
@@ -135,7 +139,7 @@ app.config(['$translateProvider', function ($translateProvider) {
         'APP_GIT_STARGAZERS' : 'Gwiazdki',
         'APP_GIT_WATCHERS' : 'Obserwatorzy',
         'APP_GIT_OPEN_ISSUES' : 'Otwarte zagadnienia',
-        'APP_USER_TYPE_ORG' : 'Firma',
+        'APP_USER_TYPE_ORG' : 'Profil na GitHub',
         'APP_USER_TYPE_U' : 'Osoba prywatna',
         'APP_PROFILE_INFO' : 'Informacje o użytkowniku',
         'APP_PROJECT_LIST' : 'Lista projektów',
@@ -153,7 +157,8 @@ app.config(['$translateProvider', function ($translateProvider) {
         'APP_PROJECT_SEARCH_HINT_COL' : 'Szukaj po',
         'APP_GITHUB_USER_SETTINGS': 'Wybierz użytkownika',
         'APP_GITHUB_FIND_USER_HINT' : 'kogo szukamy ?',
-        'TEXT_OK_GITHUB_USER_SETTINGS_SAVED' : 'Użytkownik został zapisany'
+        'TEXT_OK_GITHUB_USER_SETTINGS_SAVED' : 'Użytkownik został zapisany',
+        'TEXT_OK_NEW_USER_SAVED' : 'Użytkownik został dodany'
       
     });   
     
