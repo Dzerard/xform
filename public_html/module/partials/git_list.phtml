@@ -1,0 +1,30 @@
+<div class="list-group-item">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="#"><% item.name %></a><br>
+            <span class="list-desc"><% item.description %></span>
+        </div>
+        <div class="col-md-6">
+            <span class="list-fork" data-toggle="tooltip" data-placement="top" title="'+$translate('APP_GIT_FORK')+'">'+item.forks_count+'</span><br>
+            <span class="list-calendar">'+item.updated_at+'</span>
+        </div>
+    </div>
+    <div class="flip-action">
+        <button class="btn btn-more" data-toggle="tooltip" data-placement="left" title="'+$translate('APP_GIT_MORE_INFO')+'"></button>
+        <button class="btn btn-stats" data-toggle="tooltip" data-placement="left" title="'+$translate('APP_GIT_STATS')+'"></button>
+    </div>
+    <div class="row more-info">
+        <div class="col-md-6">
+            <a href="#">'+item.name+'</a><br>
+            <span class="list-desc">'+item.description+'</span>
+        </div>
+        <div class="col-md-6">
+            <span class="list-fork" data-toggle="tooltip" data-placement="top" title="'+$translate('APP_GIT_FORK')+'">'+item.forks_count+'</span><br>
+            <span class="list-calendar">'+item.updated_at+'</span>
+       </div>
+    </div>
+    <div class="flip-action">
+        <button class="btn btn-more" data-toggle="tooltip" data-placement="left" title="'+$translate('APP_GIT_MORE_INFO')+'"></button>
+        <button class="btn btn-stats" data-toggle="tooltip" data-placement="left" title="'+$translate('APP_GIT_STATS')+'"></button>
+    </div>
+</div>

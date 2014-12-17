@@ -9,10 +9,10 @@
         public function getConfig() {
 
                 $post = $_POST;
-                
+                           
                 if($post) {                    
                                         
-                    if(isset($post['file']) && (bool)$post['file'] === true) {
+                    if(isset($post['file']) && $post['file'] === 'true') {
                         $result = file_get_contents($post['url']);
                         echo json_encode(array('response' => json_decode($result)));
                         exit;                         

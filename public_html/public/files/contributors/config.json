@@ -1,0 +1,11 @@
+{
+    "defaultConnection": "file",
+    "url": "",
+    "defaultUser": "x-formation",
+    "otherUsers" : {
+        "name" : ["Dzerard"]
+    },
+    "connectedUser" : "x-formation",            
+    "author": "Dzerard",
+    "homepage" : "lukaszgielar.com"
+}

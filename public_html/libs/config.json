@@ -1,8 +1,1 @@
-{
-  "name": "Xformation",
-  "version": "0.0.1",
-  "author": "Luke <gielarek@gmail.com>",
-  "curl": "", 
-  "license": "MIT",
-  "homepage": "lukaszgielar.com"
-}
+{"defaultConnection":"file","url":"http:\/\/lukaszgielar.com\/contributors.json","defaultUser":"Dzerard","otherUsers":{"name":["Dzerard"]},"connectedUser":"x-formation","author":"Dzerard","homepage":"lukaszgielar.com"}

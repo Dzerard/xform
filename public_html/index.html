@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <title>Github - Xformation - Stats</title>
         
@@ -11,14 +11,17 @@
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <link media="all" rel="stylesheet" type="text/css" href="libs/bootstrap/dist/css/bootstrap.css" />
         <link media="screen" rel="stylesheet" type="text/css" href="libs/fontawesome/css/font-awesome.min.css" >   
-        <link media="all" rel="stylesheet" type="text/css" href="public/css/style.css" />            
+        <link media="all" rel="stylesheet" type="text/css" href="public/css/jquery-ui-1.10.4.custom.css" />
+        <link media="all" rel="stylesheet" type="text/css" href="public/css/style.css" />                    
 
         <!--<script src="libs/angular/angular.js"></script>-->    
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>        
         <script src="libs/angular.min.js"></script>
         <script src="libs/jquery/dist/jquery.js"></script>
         <script src="libs/modernizr/modernizr.js"></script>    
         <script src="libs/bootstrap/dist/js/bootstrap.js"></script>      
+        <script src="libs/jquery-ui-1.10.4.custom.min.js"></script>      
         
         <script src="libs/angular-ext.js"></script>            
         <script src="libs/ready.js"></script>           
@@ -38,67 +41,282 @@
                     <a class="navbar-brand  hidden settings-top-menu" data-toggle="tooltip" data-placement="right" title="{{  'APP_SETTINGS' | translate }}" href="javascript:;">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <a class="navbar-brand" href="javascript:;"><i class="fa fa-github"></i>&ensp;{{ 'APP_NAME' | translate }}</a>
+                    <a class="navbar-brand navbar-logo" href="javascript:;"><i class="fa fa-github"></i>&ensp;{{ 'APP_NAME' | translate }}</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" data-ng-click="windowPrint()" class="print-button">{{  'APP_PRINT' | translate }}</a></li>                                
-                </ul>               
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" class="user-button hidden" id="contributors_button" data-rel="container-content">{{ 'CONTRIBUTORS_CHART' | translate }}</a></li>                                
+                        <li class="dropdown lang-switch">
+                            <a href="#" class="lang-button dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+                                {{ 'APP_LANG_PL' | translate }}
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" data-ng-click="toggleLangEn()" data-lang="en">{{ 'APP_LANG_EN' | translate }}</a></li>                                                                                  
+                                <li><a href="#" data-ng-click="toggleLangPl()" data-lang="pl">{{ 'APP_LANG_PL' | translate }}</a></li>       
+                            </ul>                           
+                        </li>               
+                    </ul>               
                 </div>
             </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
-                    <button class="toogle-sidebar" data-toggle="tooltip" data-placement="right" title="{{  'APP_SETTINGS_HIDE' | translate }}"  >×</button>
-                    <form method="post" action="">
+                    <button class="toogle-sidebar" data-toggle="tooltip" data-placement="left" title="{{  'APP_SETTINGS_HIDE' | translate }}"  >×</button>
+                    
                         <ul class="nav nav-sidebar">
                             <li class="activate-settings">
-                                <a href="#" class="activate-settings-button" data-rel="show-settings">
+                                <a href="#" class="activate-settings-button" data-rel="contributors_settings" >
                                     <i class="fa fa-cog"></i>&ensp;{{  'APP_SETTINGS' | translate }}
                                 </a>
-                                <ul class="nav show-settings">
+                                <ul class="nav show-settings" id="contributors_settings">
                                     <li>
-                                        <a href="#" data-rel="file-upload">
-                                            <i class="fa fa-upload"></i>&ensp;Wybierz plik
+                                        <a href="#" data-rel="contributors-file">
+                                            <i class="fa fa-upload"></i>&ensp;{{  'APP_CHOOSE_FILE' | translate }}
                                         </a>
-                                        <div class="file-upload">
-                                            <input type="file" data-nv-file-select="" uploader="uploader">
-                                        </div>
+                                        <section class="file-upload contributors-file">
+                                            <form method='post' class="contributors-upload" enctype="multipart/form-data" action="ext/save_file.php">
+                                                <div class="form-group">                                                    
+                                                    <input type="file" id="contibutorsFileUpload" name="contibutorsFile" title="Plik .json" required>
+                                                </div>                                                   
+                                                <button class="btn btn-sm btn-default" type="submit" name="saveFile">{{ 'TEXT_SAVE' | translate}}</button>
+                                            </form>
+                                        </section>
                                     </li>
                                     <li> 
-                                        <a href="#">
-                                            <i class="fa fa-link"></i>&ensp;Wybierz ścieżkę do pliku
+                                        <a href="#" data-rel="path-to-contributors">
+                                            <i class="fa fa-link"></i>&ensp;{{  'APP_PATH_TO_FILE' | translate }}
                                         </a>
+                                        <section class="path-to-contributors">
+                                            <div class="row">                                                    
+                                                <div class="col-lg-12">
+                                                    <form method='post' class="contributors-url" action="ext/settings.php">
+                                                        <div class="input-group">
+                                                          <input type="text" class="form-control" required>
+                                                          <span class="input-group-btn">
+                                                            <button class="btn btn-default" type="submit">{{'TEXT_SAVE' | translate}}</button>
+                                                          </span>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                              </div>
+                                        </section>
+                                    </li>
+<!--                                    <li> 
+                                        <a href="#" data-rel="path-to-files-contributors">
+                                            <i class="fa fa-folder-o"></i>&ensp;{{  'APP_FILE_LIST' | translate }}
+                                        </a>
+                                        <section class="path-to-files-contributors">
+                                            <div class="alert alert-info">
+                                                {{  'TEXT_LIST_EMPTY' | translate }}
+                                            </div>
+                                        </section>
+                                    </li>-->
+                                    <li> 
+                                        <div class="contributors-def-settings">
+                                            <i class="fa fa-info-circle"></i>&ensp;{{  'APP_CONNECT_CONNTIBUTORS' | translate }}
+                                            <div>
+                                                <form method="post" action="ext/settings.php" class="contributors-settings-form">
+                                                    <div class="radio">
+                                                        <label>
+                                                          <input type="radio" name="connectRadio" id="connectRadioFileDef" value="default">
+                                                          {{  'APP_CONNECT_BY_FILE_DEFAULT' | translate }}
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                          <input type="radio" name="connectRadio" id="connectRadioUrl" value="file">
+                                                          {{  'APP_CONNECT_BY_FILE' | translate }}
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                          <input type="radio" name="connectRadio" id="connectRadioFile" value="url" checked>
+                                                          {{  'APP_CONNECT_BY_PATH' | translate }}
+                                                        </label>
+                                                    </div>                                                    
+                                                    <button type="submit" class="btn btn-sm btn-default" name>{{ 'TEXT_SAVE' | translate}}</button>
+                                                </form>
+                                            </div>
+                                        </div>                                        
                                     </li>
                                 </ul>
-                            </li>                    
+                            </li> 
+                            <li class="activate-settings">
+                                <a href="#" class="activate-settings-button" data-rel="github-settings" >
+                                    <i class="fa fa-git"></i>&ensp;{{  'APP_GIT_SETTINGS' | translate }}
+                                </a>
+                                <ul class="nav show-settings" id="github-settings">                                    
+                                    <li> 
+                                        <a href="#" data-rel="path-to-github-profile">
+                                            <i class="fa fa-search"></i>&ensp;{{  'APP_GIT_FIND_USER' | translate }}
+                                        </a>
+                                        <section class="path-to-github-profile">
+                                            <div class="row">                                                    
+                                                <div class="col-lg-12">                                                  
+                                                    <input type="text" class="form-control" id="searchGitUser" placeholder="{{  'APP_GITHUB_FIND_USER_HINT' | translate }}">                                                                                                      
+                                                </div>
+                                            </div>                                             
+                                        </section>
+                                    </li>
+                                        <div class="contributors-def-settings">
+                                            <i class="fa fa-info-circle"></i>&ensp;{{  'APP_GITHUB_USER_SETTINGS' | translate }}
+                                            <div>
+                                                <form class="github-user-choose" action="ext/settings.php" method="post">
+                                                    <div class="radio">
+                                                        <label>
+                                                          <input type="radio" name="userRadio" id="userRadioDefault" value="x-formation" checked>
+                                                          Xformation
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                          <input type="radio" name="userRadio" id="userRadioOther" value="Dzerard">
+                                                          Dzerard
+                                                        </label>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-sm btn-default">{{ 'TEXT_SAVE' | translate}}</button>
+                                                </form>
+                                            </div>
+                                        </div>
+<!--                                    <li> 
+                                        <a href="#" data-rel="gihub-profiles-list">
+                                            <i class="fa fa-smile-o"></i>&ensp;{{  'APP_USERS_LIST' | translate }}
+                                        </a>
+                                        <section class="gihub-profiles-list">
+                                            <div class="alert alert-info">
+                                                {{  'TEXT_LIST_EMPTY' | translate }}
+                                            </div>
+                                        </section>
+                                    </li>-->
+                                </ul>
+                            </li> 
+                            
                         </ul>
-                    </form>                  
+                                   
                 </div>
-                <div id="mainContainer" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <header>
-                        <h1 class="page-header">{{ 'APP_NAME' | translate }} - contributors.json</h1>
-                        <button id="contributors_refresh" class="btn btn-default btn-refresh" data-toggle="tooltip" data-placement="left" title="{{  'APP_SETTINGS_REFRESH' | translate }}"><i class="fa fa-refresh"></i></button>
-                    </header>                 
+                
+                <div id="mainContainer" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main side">                                                        
                     <div class="container-content">
+                        <header>
+                            <h1 class="page-header" data-rel="container-content" data-button="contributors_button">{{ 'APP_NAME' | translate }} - contributors.json</h1>
+                            <button id="contributors_refresh" class="btn btn-default btn-refresh" data-toggle="tooltip" data-placement="left" title="{{  'APP_SETTINGS_REFRESH' | translate }}"><i class="fa fa-refresh"></i></button>
+                        </header> 
+                        <div class="jumbotron">                            
+                            <div class="container-fluid">
+                                <div class="loader"></div>
+                                <div class="panel panel-default hidden" id="contributors_container">                                             
+                                    <div class="panel-heading">
+                                        <span><i class="fa fa-trophy"></i>&ensp;{{ 'APP_GIT_CONTRIBUTORS_STATS' | translate }}</span>  
+                                        <button class="btn btn-default pull-right btn-hide-panel"  data-toggle="tooltip" data-placement="left" title="{{ 'TEXT_HIDE' | translate }}">×</button>
+                                    </div>
+                                    <div class="panel-body"> 
+                                        <div class="row">
+                                            <div class="col-md-6">                          
+                                                <div id='contributors_table'></div>
+                                            </div>
+                                            <div class="col-md-6">                          
+                                                  <div id='contributors_chart'></div>    
+                                            </div>
+                                        </div>                                                
+                                    </div>
+                                </div>                               
+                            </div>
+                        </div>
+                    </div>  
+                    
+                    <header>
+                        <h1 class="page-header">{{ 'APP_NAME' | translate }}</h1>                    
+                        <button id="github_refresh" class="btn btn-default btn-refresh" data-toggle="tooltip" data-placement="left" title="{{  'APP_SETTINGS_REFRESH' | translate }}"><i class="fa fa-refresh"></i></button>
+                    </header>
+                    <div class="container-content-gihub jumbotron">
+                        <div class="loader"></div>
                         <div class="container-fluid">
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default hidden" id="github_content_profile">                                            
+                                        <div class="panel-heading">
+                                            <span><i class="fa fa-user"></i>&ensp;{{ 'APP_PROFILE_INFO' | translate }}</span>  
+                                            <!--<button class="btn btn-default pull-right btn-hide-panel"  data-toggle="tooltip" data-placement="left" title="{{ 'TEXT_HIDE' | translate }}">×</button>-->
+                                        </div>
+                                                                               
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt15">
                                 <div class="col-md-6">                          
-                                    <div id='contributors_table'></div>
+                                    
+                                    <div class="panel panel-default hidden" id='github_content_left'>                                            
+                                        <div class="panel-heading">
+                                            <span><i class="fa fa-github"></i>&ensp;{{ 'APP_PROJECT_LIST' | translate }}</span>
+                                            <button class="btn btn-default pull-right btn-hide-panel"  data-toggle="tooltip" data-placement="left" title="{{ 'TEXT_HIDE' | translate }}">×</button>                                         
+                                        </div>
+                                        <div class="panel-body">                                                                                          
+                                            <form role="form"  class="form-horizontal">                                                                                            
+                                                <div class="row">
+                                                  <div class="col-lg-6">
+                                                      <div class="form-group">
+                                                        <label for="repoSearch" class="col-sm-3 control-label label-search">{{ 'APP_PROJECT_SEARCH' | translate }}</label>
+                                                        <div class="col-sm-9">
+                                                            <div class="input-group">                                                                                                                              
+                                                                <input type="text" class="form-control" id="repoSearch" placeholder="{{ 'APP_PROJECT_SEARCH_HINT' | translate }}">
+                                                                <span class="clear-input" data-toggle="tooltip" data-placement="left" title="{{ 'TEXT_CLEAR' | translate }}"></span>
+                                                                <input type="hidden" id="repoSearchType" value="">                                                                
+                                                                <div class="input-group-btn">                                                                      
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <i class="fa fa-ellipsis-h"></i>
+                                                                    </button>                                                                                                                                        
+                                                                    <ul class="dropdown-menu search-dropdown" role="menu">
+                                                                        <li data-rel="repo-link"><a href="javascript:;">{{ 'APP_GIT_PROJECT_NAME' | translate }}</a></li>
+                                                                        <li data-rel="list-description"><a href="javascript:;">{{ 'APP_GIT_DESCRIPTION' | translate }}</a></li>
+                                                                        <li data-rel="list-fork"><a href="javascript:;">{{ 'APP_GIT_FORK' | translate }}</a></li>
+                                                                        <li data-rel="list-stargazers"><a href="javascript:;">{{ 'APP_GIT_STARGAZERS' | translate }}</a></li>
+                                                                        <li data-rel="list-language"><a href="javascript:;">{{ 'APP_GIT_LANGUAGE' | translate }}</a></li>                                                                    
+                                                                        <li data-rel="list-calendar"><a href="javascript:;">{{ 'APP_GIT_UPDATED_AT' | translate }}</a></li>                                                                    
+                                                                    </ul>
+                                                                </div>                                                                
+                                                            </div>                                                          
+                                                        </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-lg-6">
+                                                      <div class="form-group">
+                                                        <label for="repoSort" class="col-sm-3 control-label label-sort">{{ 'APP_PROJECT_SORT' | translate }}</label>
+                                                        <div class="col-sm-9">
+                                                            
+                                                            <div class="btn-group">
+                                                                <input type="hidden" id="repoSortType" value="">                                                                
+                                                                <button class="btn btn-default btn-srt dropdown-toggle name-sort-asc" type="button" data-toggle="dropdown" aria-expanded="false" data-active="name" data-type="asc">
+                                                                {{ 'APP_GIT_PROJECT_NAME' | translate }}&ensp;
+                                                                </button>
+                                                                <ul class="dropdown-menu" id="repoSort" role="menu">
+                                                                    <li data-rel="name" data-sort="asc"><a href="javascript:;" class="name-sort-asc">{{ 'APP_GIT_PROJECT_NAME' | translate }}&ensp;</a></li>
+                                                                    <li data-rel="name" data-sort="desc"><a href="javascript:;" class="name-sort-desc">{{ 'APP_GIT_PROJECT_NAME' | translate }}&ensp;</a></li>
+                                                                    <li data-rel="description" data-sort="asc"><a href="javascript:;" class="name-sort-asc">{{ 'APP_GIT_DESCRIPTION' | translate }}&ensp;</a></li>
+                                                                    <li data-rel="description" data-sort="desc"><a href="javascript:;" class="name-sort-desc">{{ 'APP_GIT_DESCRIPTION' | translate }}&ensp;</a></li>
+                                                                    <li data-rel="stargazers" data-sort="asc" data-type="number"><a href="javascript:;" class="number-sort-asc">{{ 'APP_GIT_STARGAZERS' | translate }}&ensp;</a></li>
+                                                                    <li data-rel="stargazers" data-sort="desc" data-type="number"><a href="javascript:;" class="number-sort-desc">{{ 'APP_GIT_STARGAZERS' | translate }}&ensp;</a></li>
+                                                                    <li data-rel="fork" data-sort="asc" data-type="number"><a href="javascript:;" class="number-sort-asc">{{ 'APP_GIT_FORK' | translate }}&ensp;</a></li>
+                                                                    <li data-rel="fork" data-sort="desc" data-type="number"><a href="javascript:;" class="number-sort-desc">{{ 'APP_GIT_FORK' | translate }}&ensp;</a></li>
+                                                                </ul>
+                                                            </div>                                                            
+                                                            
+                                                        </div>
+                                                      </div>                                               
+                                                  </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>                                 
+                                    
                                 </div>
                                 <div class="col-md-6">                          
-                                      <div id='contributors_chart'></div>    
+                                    <div id='github_content_right' class="hidden"></div>    
                                 </div>
                             </div>
                         </div>
-                    </div>        
-                    <header>
-                        <h1 class="page-header">{{ 'APP_NAME' | translate }} - X-Formation</h1>                    
-                        <button id="github_refresh" class="btn btn-default btn-refresh" data-toggle="tooltip" data-placement="left" title="{{  'APP_SETTINGS_REFRESH' | translate }}"><i class="fa fa-refresh"></i></button>
-                    </header>
-                    <div class="container-content-gihub">
-                        <div class="loader"></div>
+                        
                     </div>                  
                 </div>            
             </div>
