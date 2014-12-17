@@ -13,10 +13,10 @@ This project combine PHP (PHP GitHub API), and JavaScript(jQuery and Angular)
 
 ##Demo
 
-[My webpage](http://luakszgielar.com/xf/).
+[My webpage](http://lukaszgielar.com/xf/).
 
-Login: 'xform'
-Pass: 'xform'
+Login: `xform`
+Pass: `xform`
 
 
 Best experience on `Chrome 39` and other that fully support HTML5 (ex. localStorage)
